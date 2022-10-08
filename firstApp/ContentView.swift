@@ -10,31 +10,18 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-        ZStack { // background color
-            LinearGradient(gradient: Gradient(colors: [.blue, Color("lightBlue")]),
-                           startPoint: .topLeading,
-                           endPoint: .bottomTrailing)
-                            .ignoresSafeArea()
+        ZStack {
+            // background color
+            BackgroundView(topColor: .blue,
+                           bottomColor: Color("lightBlue"))
             
             VStack {
-                Text("Cupertino, CA")
-                    .font(.system(size: 32.0, weight: .medium, design: .default))
-                    .foregroundColor(.white)
-                    .padding()
-                
-                VStack(spacing: 10.0) {
-                    Image(systemName: "cloud.sun.fill")
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 180.0, height: 180.0)
-                    
-                    Text("80°")
-                        .font(.system(size: 70, weight: .medium))
-                        .foregroundColor(.white)
-                }
-                .padding(.bottom, 80.0)
-                
+                // City
+                CityTextView(cityName: "Cupertino, CA")
+                // main weather
+                MainWeatherStatusView(weather: "cloud.sun.fill",
+                                      temperature: 80)
+                // week temperature
                 HStack(spacing: 24.0) {
                     WeatherDayView(dayOfWeek: "TUE",
                                    imageName: "cloud.sun.fill",
@@ -57,16 +44,11 @@ struct ContentView: View {
                                    temperature: 75)
                 }
                 Spacer()
-                    
-                Button {
-                    print("tapped")
-                } label: {
-                    Text("Change Day Time")
-                        .frame(width: 280.0, height: 50.0)
-                        .background(.white)
-                        .font(.system(size: 20, weight: .bold, design: .default))
-                        .cornerRadius(10.0)
-                }
+                // button
+                WeatherButtonView(onPressText: "tapped",
+                                  buttonText: "Change Day time",
+                                  backgroundColor: .white,
+                                  textColor: .blue)
                 
                 Spacer()
             }
@@ -101,6 +83,73 @@ struct WeatherDayView: View {
             Text("\(temperature)°")
                 .font(.system(size: 28, weight: .bold))
                 .foregroundColor(.white)
+        }
+    }
+}
+
+struct BackgroundView: View {
+    
+    var topColor: Color
+    var bottomColor: Color
+    
+    var body: some View {
+        LinearGradient(gradient: Gradient(colors: [topColor, bottomColor]),
+                       startPoint: .topLeading,
+                       endPoint: .bottomTrailing)
+        .ignoresSafeArea()
+    }
+}
+
+struct CityTextView: View {
+    
+    var cityName: String
+    
+    var body: some View {
+        Text(cityName)
+            .font(.system(size: 32.0, weight: .medium, design: .default))
+            .foregroundColor(.white)
+            .padding()
+    }
+}
+
+struct MainWeatherStatusView: View {
+    
+    var weather: String
+    var temperature: Int
+    
+    var body: some View {
+        VStack(spacing: 10.0) {
+            Image(systemName: weather)
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 180.0, height: 180.0)
+            
+            Text("\(temperature)°")
+                .font(.system(size: 70, weight: .medium))
+                .foregroundColor(.white)
+        }
+        .padding(.bottom, 80.0)
+    }
+}
+
+struct WeatherButtonView: View {
+    
+    var onPressText: String
+    var buttonText: String
+    var backgroundColor: Color
+    var textColor: Color
+    
+    var body: some View {
+        Button {
+            print(onPressText)
+        } label: {
+            Text(buttonText)
+                .frame(width: 280.0, height: 50.0)
+                .background(backgroundColor)
+                .foregroundColor(textColor)
+                .font(.system(size: 20, weight: .bold, design: .default))
+                .cornerRadius(10.0)
         }
     }
 }
