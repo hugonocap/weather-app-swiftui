@@ -20,7 +20,16 @@ struct ContentView: View {
                 Text("Cupertino, CA")
                     .font(.system(size: 32.0, weight: .medium, design: .default))
                     .foregroundColor(.white)
-                    .padding(.bottom, 200.0)
+                    .padding()
+                
+                VStack {
+                    Image(systemName: "cloud.sun.fill")
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 180.0, height: 180.0)
+                }
+                
                 Spacer()
             }
         }
