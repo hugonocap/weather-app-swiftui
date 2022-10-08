@@ -9,15 +9,11 @@ import SwiftUI
 
 struct WeatherButtonView: View {
     
-    var onPressText: String
     var buttonText: String
     var backgroundColor: Color
     var textColor: Color
     
     var body: some View {
-        Button {
-            print(onPressText)
-        } label: {
             Text(buttonText)
                 .frame(width: 280.0, height: 50.0)
                 .background(backgroundColor)
@@ -26,4 +22,3 @@ struct WeatherButtonView: View {
                 .cornerRadius(10.0)
         }
     }
-}
