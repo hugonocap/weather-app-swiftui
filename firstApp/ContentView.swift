@@ -8,13 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
         ZStack { // background color
-            Color.gray
-                .ignoresSafeArea()
+            LinearGradient(gradient: Gradient(colors: [.blue, .white]),
+                           startPoint: .topLeading,
+                           endPoint: .bottomTrailing)
+                            .ignoresSafeArea()
+            
+            VStack {
+                Text("Cupertino, CA")
+                    .font(.system(size: 32.0, weight: .medium, design: .default))
+                    .foregroundColor(.white)
+                    .padding(.bottom, 200.0)
+                Spacer()
+            }
         }
-        
-        Text("hello")
     }
 }
 
