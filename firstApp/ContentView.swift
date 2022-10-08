@@ -132,24 +132,3 @@ struct MainWeatherStatusView: View {
         .padding(.bottom, 80.0)
     }
 }
-
-struct WeatherButtonView: View {
-    
-    var onPressText: String
-    var buttonText: String
-    var backgroundColor: Color
-    var textColor: Color
-    
-    var body: some View {
-        Button {
-            print(onPressText)
-        } label: {
-            Text(buttonText)
-                .frame(width: 280.0, height: 50.0)
-                .background(backgroundColor)
-                .foregroundColor(textColor)
-                .font(.system(size: 20, weight: .bold, design: .default))
-                .cornerRadius(10.0)
-        }
-    }
-}
